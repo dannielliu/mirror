@@ -120,7 +120,7 @@ G4VPhysicalVolume* MirrorDetectorConstruction::Construct()
   new G4LogicalSkinSurface("MirrorSurface", logicMirror, MirrorSurface);
 
   //construct fibers
-  G4double firstFiberPositionX = -148.9 *mm; //-154.5 * mm;// change to -148.9*mm??
+  G4double firstFiberPositionX = -152.93*mm;//-148.9 *mm; //-154.5 * mm;// change to -148.9*mm??
   G4double fiberGap = 19.82 *mm; //20 *mm;// change to 19.82*mm??
   G4double firstFiberCenterPosition = 12.0 *mm; //11.5 *mm;// change to 12*mm??
   G4double fiberPitch = 1.07*mm;

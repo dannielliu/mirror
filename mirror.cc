@@ -43,7 +43,7 @@ int main(int argc,char** argv)
 //  G4VSteppingVerbose::SetInstance(verbosity);
   G4String physName = "QGSP_BERT_EMV";
 
-  G4int seed = time(0)+getpid();
+  G4int seed = time(0);//+getpid();
   if (argc  > 2) seed = atoi(argv[argc-1]);  //"atoi" change string to integer, the last argument will be the seed.
 
   // Choose the Random engine
@@ -106,7 +106,7 @@ int main(int argc,char** argv)
 #ifdef G4UI_USE
       G4UIExecutive * ui = new G4UIExecutive(argc,argv);
 #ifdef G4VIS_USE
-      UImanager->ApplyCommand("/control/execute vis2.mac");     
+      UImanager->ApplyCommand("/control/execute vis.mac");     
 #endif
       ui->SessionStart();
       delete ui;
