@@ -60,6 +60,8 @@ MirrorDetectorConstruction::MirrorDetectorConstruction()
   mppcDist  = 0.00*mm;
   mppcTheta = 0.0*deg;
   mppcZ     = 0.05*mm;
+  //mppcOriginX;
+  mppcOriginZ = wlsfiberZ/2 + mppcZ;
   clrfiberZ  = mppcZ + 10.*nm ;
   clrfiberHalfL = mppcHalfL;
 
@@ -405,7 +407,7 @@ G4LogicalVolume* MirrorDetectorConstruction::ConstructFiber()
   //--------------------------------------------------  
 
   // Clear Fiber (Coupling Layer)
-  
+  /*
   G4VSolid* solidCouple = new G4Box("Couple",coupleRX,coupleRY,coupleZ);
 
   G4LogicalVolume*   logicCouple = new G4LogicalVolume(solidCouple,
@@ -419,7 +421,7 @@ G4LogicalVolume* MirrorDetectorConstruction::ConstructFiber()
                     logicHole,
                     false,
                     0);
-  
+  */
   //--------------------------------------------------
   // A logical layer in front of PhotonDet
   //--------------------------------------------------  
@@ -427,7 +429,7 @@ G4LogicalVolume* MirrorDetectorConstruction::ConstructFiber()
   // Purpose: Preventing direct dielectric to metal contact  
 
   // Check for valid placement of PhotonDet
-  
+ /* 
   if (mppcTheta > std::atan(mppcDist / mppcHalfL)) {
 
      mppcTheta = 0;
@@ -458,11 +460,11 @@ G4LogicalVolume* MirrorDetectorConstruction::ConstructFiber()
                     logicCouple,
                     false,
                     0); 
-  
+  */
   //--------------------------------------------------
   // PhotonDet (Sensitive Detector)
   //--------------------------------------------------  
-  
+  //G4double firstFiberPositionX = -148.9 *mm;  
   // Physical Construction
   G4VSolid* solidPhotonDet;
 
@@ -478,10 +480,10 @@ G4LogicalVolume* MirrorDetectorConstruction::ConstructFiber()
                                                         "PhotonDet");
 
   new G4PVPlacement(0,
-                    G4ThreeVector(0.0,0.0,0.0),
+                    G4ThreeVector(0.0,0.0,-mppcOriginZ),
                     logicPhotonDet,
                     "PhotonDet",
-                    logicClrfiber,
+                    logicHole,//logicClrfiber,
                     false,
                     0);
 
@@ -524,7 +526,7 @@ G4LogicalVolume* MirrorDetectorConstruction::ConstructFiber()
 G4double MirrorDetectorConstruction::GetWLSFiberEnd()
 {
   return wlsfiberZ;
-}
+} 
 
 G4bool MirrorDetectorConstruction::IsPerfectFiber()
 { 
